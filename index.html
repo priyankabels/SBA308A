@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script
+    src="https://kit.fontawesome.com/d8f052c6cf.js"
+    crossorigin="anonymous"
+  ></script>
+    
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./favorites.js" defer></script>
+    <script type="module" src="./index.js" defer></script>
+    <title>SBA308A</title>
+</head>
+<body>
+    <div class="main">
+    <div class="container">
+    <div class="selectCharacter">
+    <h2>Select a Disney Character</h2>
+    <select
+       id="characterSelect"
+       style="width: 300px;"
+       aria-label="form-select-lg"
+     >
+     </select>
+        <button id="getFavouritesBtn" class="btn btn-success mx-auto mb-5">
+          Get Favorites
+        </button>
+      </div>
+   
+     <div id="charactersDisplay">
+
+     </div>
+    <div id="favoritesDisplay">
+
+    </div>
+    </div>
+    <div class="searchBox">
+        <div>
+     <h1>Character Search</h1>
+    </div>
+    <div>
+     <input type="text" id="searchInput" placeholder="Search characters..." />
+    </div>
+    <div id="searchDisplay">
+
+    </div>
+    </div>
+</div>
+    
+</body>
+</html>
