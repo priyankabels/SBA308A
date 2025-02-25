@@ -15,6 +15,35 @@ async function intialLoad() {
     // const baseUrl = 'https://api.disneyapi.dev/';  // Base URL for the Disney API
     // Example endpoint to get Disney characters
     const endpoint = "character";
+     //Add axios interceptor
+    //* Request interceptor
+    axios.interceptors.request.use(request => {
+        request.metadata = request.metadata || {};
+        request.metadata.startTime = new Date().getTime();
+        console.log('Request started at:', new Date(request.metadata.startTime).toLocaleString());
+        return request;
+    },
+    (error) => {
+        //If error sending request set the progress bar style to default
+        document.body.style.cursor="default";
+        throw error;
+    });
+
+    //* Response interceptor
+    axios.interceptors.response.use(
+        (response) => {
+            response.config.metadata.endTime = new Date().getTime();
+            response.durationInMS = response.config.metadata.endTime - response.config.metadata.startTime;
+
+            console.log('Response received at:', new Date(response.config.metadata.endTime).toLocaleString());
+               
+            return response;
+        },
+        (error) => {
+            error.config.metadata.endTime = new Date().getTime();
+            error.durationInMS = error.config.metadata.endTime - error.config.metadata.startTime;
+            throw error;
+    });
 
     const response = await axios.get(`${endpoint}`, {
       headers: {
@@ -22,6 +51,7 @@ async function intialLoad() {
         // Add your API key here
       },
     });
+    console.log("Response Time in MS: ", response.durationInMS);
 
     //Response object contains info and data object fetching data object
     let info = response.data.data;
